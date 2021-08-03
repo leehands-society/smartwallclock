@@ -31,11 +31,29 @@ bus.write_byte_data(DEVICE_ADDRESS,CTR_DECODEEN, 0xFF)
 sleep(0.1)
 bus.write_byte_data(DEVICE_ADDRESS,0x00,0x0D)
 
+bus.write_byte_data(0x52,0x01,0x03)     #   Over Range Alert 1  / Under Range Alert  1 => 3
+sleep(0.25)
+bus.write_byte_data(0x52,0x02,0x20)
+sleep(0.25)
+
 
 while True:
 
-    buff = bus.read_byte_data(DEVICE_ADDRESS, 0x1C)
-    print(buff)
+    #buff = bus.read_byte_data(DEVICE_ADDRESS, 0x1C)
+    #hbuf = hex(buff)
+    #print(hbuf)
+    #sleep(0.25)
+
+    buff = bus.read_word_data(0x52, 0x00)
+    MSB = (buff << 4) & 0x00F0
+    LSB = (buff >> 12) & 0x000F
+    buff = MSB | LSB
+    buff = buff *(3.3 / 256)
+    print("ADC : %.2f V" %(buff))
+    sleep(0.25)
+    #buff = bus.read_byte_data(0x52, 0x07)
+    #hbuf = hex(buff)
+    #print(hbuf)
     ld_PWR.on()
     ld_STAT.off()
     ld_SYNC.on()
