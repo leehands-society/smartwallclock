@@ -92,8 +92,12 @@ class AS1115:
         else:
             ld_ALARM_CA.off()
             ld_LCUC_CA.off() 
-    def Brighless(self,adc_input)
-        
+    def Brightless(self, adcinput):
+        buff = (int)((float)(adcinput / 1.4) * 16)
+        if buff < 0 :
+            buff = 0
+        self.bus.write_byte_data(self.addr,CTR_INTENSITY, buff)
+
 
 
 
