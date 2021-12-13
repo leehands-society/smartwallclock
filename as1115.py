@@ -70,7 +70,7 @@ class AS1115:
             ld_AM_CA.off()
             dis_hour = self.now.tm_hour - 12
             
-            self.bus.write_byte_data(self.addr,FND_HR_01, dis_hour%10)
+            self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
             if dis_hour < 10:   
                 dis_hour = 0x0F
             else :
@@ -80,11 +80,11 @@ class AS1115:
             ld_PM_CA.off()
             ld_AM_CA.on()
             dis_hour = self.now.tm_hour
-            self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour/10)
-            self.bus.write_byte_data(self.addr,FND_HR_01, dis_hour%10)
+            self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
+            self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
 
-        self.bus.write_byte_data(self.addr,FND_MN_10, self.now.tm_min/10)
-        self.bus.write_byte_data(self.addr,FND_MN_01, self.now.tm_min%10)
+        self.bus.write_byte_data(self.addr,FND_MN_10,(int)(self.now.tm_min/10))
+        self.bus.write_byte_data(self.addr,FND_MN_01,(int)(self.now.tm_min%10))
 
         if(self.now.tm_sec % 2):
             ld_ALARM_CA.on()

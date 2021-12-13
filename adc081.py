@@ -17,6 +17,6 @@ class ADC081:
         LSB = (buff >> 12) & 0x000F
         buff = MSB | LSB
         buff = buff *(3.3 / 256)
+        print("ADC : %.2f V" %(buff))
         return buff
-        #print("ADC : %.2f V" %(buff))
 
