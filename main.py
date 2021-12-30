@@ -22,13 +22,13 @@ adc = adc081.ADC081(0x50)
 asfnd = as1115.AS1115(0x00)
 
 
-
-
 while True:
     buff = adc.readVoltage()
     print("ADC : %.2f V" %(buff))
     asfnd.DisplayLocalTime()
     asfnd.Brightless(buff)
+
+    
     sleep(0.25)
 
 
