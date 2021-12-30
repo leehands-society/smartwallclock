@@ -16,11 +16,7 @@ ld_ALM = LED(24)
 
 CTR_SHUTDOWN =	0x0C
 CTR_DECODEEN =	0x09
-CTR_INTENSITY_GLOBAL    = 0x0A   #0xx0 (min) ~ 0xxF (max)
-CTR_INTENSITY_DIGI10    = 0x10   #DIGI1 (xH), DIGI0 (Hx)
-CTR_INTENSITY_DIGI32    = 0x11   #DIGI3 (xM), DIGI2 (Mx)
-CTR_INTENSITY_DIGI54    = 0x12   #DIGI5 (Sx), DIGI4 (DOT)
-CTR_INTENSITY_DIGI76    = 0x13   #DIGI7 (XX), DIGI6 (xS)
+CTR_INTENSITY =	0x0A
 CTR_SCANLIMIT =	0x0B
 CTR_FEATURE =	0x0E
 
@@ -40,8 +36,6 @@ class AS1115:
         self.bus = smbus.SMBus(1) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
         self.cnt = 0
         self.previous_min = 0;
-        self.defaultbright = 0x1
-        
 
         ld_DP.off()
         ld_PM.off()
@@ -50,13 +44,15 @@ class AS1115:
         ld_ALM.off()
     
         self.bus.write_byte_data(self.addr,CTR_FEATURE, 0x02)
+        sleep(0.01)
         self.bus.write_byte_data(self.addr,CTR_SHUTDOWN, 0x01)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI10, self.defaultbright<<4 | self.defaultbright)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI32, self.defaultbright<<4 | self.defaultbright)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI54, self.defaultbright)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI76, 0x00)
+        sleep(0.01)
+        self.bus.write_byte_data(self.addr,CTR_INTENSITY, 0x01)
+        sleep(0.01)
         self.bus.write_byte_data(self.addr,CTR_FEATURE, 0x00)
+        sleep(0.01)
         self.bus.write_byte_data(self.addr,CTR_SCANLIMIT, 0x07)
+        sleep(0.01)
         self.bus.write_byte_data(self.addr,CTR_DECODEEN, 0xFF)
 
     def print_test(self):
@@ -90,8 +86,8 @@ class AS1115:
             self.previous_min = time.tm_min
             # HOUR
             if time.tm_hour > 12 :
-                ld_PM.off()
-                ld_AM.on()
+                ld_PM.on()
+                ld_AM.off()
                 dis_hour = time.tm_hour - 12
                 
                 self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
@@ -102,8 +98,8 @@ class AS1115:
                     
                 self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
             else :
-                ld_PM.on()
-                ld_AM.off()
+                ld_PM.off()
+                ld_AM.on()
                 dis_hour = time.tm_hour
                 self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
                 self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
@@ -117,17 +113,7 @@ class AS1115:
         buff = (int)((float)(adcinput / 1.4) * 16)
         if buff < 0 :
             buff = 0
-
-        brightvalue = self.defaultbright + buff;
-        if brightvalue > 0x0F :
-            brightvalue = 0x0F
-        
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI10, brightvalue<<4 | brightvalue)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI32, brightvalue<<4 | brightvalue)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI54, brightvalue)
-        self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI76, 0x00)
-
-        
+        self.bus.write_byte_data(self.addr,CTR_INTENSITY, buff)
 
 
 
