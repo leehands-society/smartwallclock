@@ -7,11 +7,12 @@ import smbus
 import time
 
 
-ld_AM_CA = LED(7)
-ld_PM_CA = LED(8)
-ld_ALARM_CA = LED(21)
-ld_LCUC_AN = LED(16)
-ld_LCUC_CA = LED(12)
+ld_DP = LED(14)
+ld_PM = LED(15)
+ld_AM = LED(18)
+ld_LUC = LED(23)
+ld_ALM = LED(24)
+
 
 CTR_SHUTDOWN =	0x0C
 CTR_DECODEEN =	0x09
@@ -24,6 +25,9 @@ FND_HR_10 = 0x01
 FND_HR_01 = 0x02
 FND_MN_10 = 0x03
 FND_MN_01 = 0x04
+FND_SS_10 = 0x06
+FND_SS_01 = 0x07
+FND_AC_01 = 0x05
 
 
 class AS1115:
@@ -31,9 +35,13 @@ class AS1115:
         self.addr = addr
         self.bus = smbus.SMBus(1) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
         self.cnt = 0
-        self.now = time.localtime()
-        ld_LCUC_AN.off()     # always GND
+        self.previous_min = 0;
 
+        ld_DP.off()
+        ld_PM.off()
+        ld_AM.off()
+        ld_LUC.off()     
+        ld_ALM.off()
     
         self.bus.write_byte_data(self.addr,CTR_FEATURE, 0x02)
         sleep(0.01)
@@ -62,36 +70,45 @@ class AS1115:
         self.bus.write_byte_data(self.addr,FND_MN_10, 3)
         self.bus.write_byte_data(self.addr,FND_MN_01, 4)
 
-    def DisplayLocalTime(self):
-        self.now = time.localtime()
-               
-        if self.now.tm_hour > 12 :
-            ld_PM_CA.on()
-            ld_AM_CA.off()
-            dis_hour = self.now.tm_hour - 12
-            
-            self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
-            if dis_hour < 10:   
-                dis_hour = 0x0F
-            else :
-                dis_hour = dis_hour/10
-            self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
-        else :
-            ld_PM_CA.off()
-            ld_AM_CA.on()
-            dis_hour = self.now.tm_hour
-            self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
-            self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
+    def DisplayLocalTime(self,time):      
 
-        self.bus.write_byte_data(self.addr,FND_MN_10,(int)(self.now.tm_min/10))
-        self.bus.write_byte_data(self.addr,FND_MN_01,(int)(self.now.tm_min%10))
-
-        if(self.now.tm_sec % 2):
-            ld_ALARM_CA.on()
-            ld_LCUC_CA.on() 
+        # SECOND
+        self.bus.write_byte_data(self.addr,FND_SS_10,(int)(time.tm_sec/10))
+        self.bus.write_byte_data(self.addr,FND_SS_01,(int)(time.tm_sec%10))
+        # DOT
+        if(time.tm_sec%2):
+            ld_LUC.on()
         else:
-            ld_ALARM_CA.off()
-            ld_LCUC_CA.off() 
+            ld_LUC.off()
+
+        # CHECK to update
+        if self.previous_min != time.tm_min:
+            self.previous_min = time.tm_min
+            # HOUR
+            if time.tm_hour > 12 :
+                ld_PM.on()
+                ld_AM.off()
+                dis_hour = time.tm_hour - 12
+                
+                self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
+                if dis_hour < 10:   
+                    dis_hour = 0x0F
+                else :
+                    dis_hour = dis_hour/10
+                    
+                self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
+            else :
+                ld_PM.off()
+                ld_AM.on()
+                dis_hour = time.tm_hour
+                self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
+                self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
+
+            # MINITE
+            self.bus.write_byte_data(self.addr,FND_MN_10,(int)(time.tm_min/10))
+            self.bus.write_byte_data(self.addr,FND_MN_01,(int)(time.tm_min%10))
+        
+               
     def Brightless(self, adcinput):
         buff = (int)((float)(adcinput / 1.4) * 16)
         if buff < 0 :
