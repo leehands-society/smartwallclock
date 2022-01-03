@@ -101,11 +101,15 @@ class AS1115:
                     dis_hour = dis_hour/10
                     
                 self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
-            else :
-                ld_PM.on()
-                ld_AM.off()
+            else : # < 12
+                ld_PM.on()   # LED OFF
+                ld_AM.off()  # LED ON
                 dis_hour = time.tm_hour
-                self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
+                if dis_hour < 10 :
+                    self.bus.write_byte_data(self.addr,FND_HR_10,0x0F)
+                else:
+                    self.bus.write_byte_data(self.addr,FND_HR_10,(int)(dis_hour/10))
+                
                 self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
 
             # MINITE
