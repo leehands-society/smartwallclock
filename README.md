@@ -1,1 +1,3 @@
-first make file
+1. TOOL CHAIN
+
+sudo apt-get install git vim -y
