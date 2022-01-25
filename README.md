@@ -12,3 +12,8 @@ Typing in command line
    
 <b> 3.excute python files  </b><br>
   " python3 main.py
+
+<b> 4. Set Autostart </b>
+  " sudo vim /etc/rc.local "
+  
+  add " sudo python3 /home/pi/smartwallclock/main.py & "
