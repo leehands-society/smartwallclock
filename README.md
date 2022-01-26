@@ -10,8 +10,8 @@
 <p>dd</p>
 
 <code>
-sudo apt-get update<br>
-sudo apt-get upgrade -y<br>
+  <p>sudo apt-get update</p>
+  <p>sudo apt-get upgrade -y</p>
 </code>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
