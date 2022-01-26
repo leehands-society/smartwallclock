@@ -17,7 +17,7 @@
 <br><code>i2c detect -y -a 1</code>
 <br>
 <br>Clone repository
-<br><code>git clone </code>
+<br><code>git clone https://github.com/leehands-society/smartwallclock.git </code>
 <br>
 <br>Excute
 <br><code>python3 main.py</code>
