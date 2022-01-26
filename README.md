@@ -11,7 +11,7 @@
 
 <code>
   sudo apt-get update
-  sudo apt-get upgrade -y
+  <br>sudo apt-get upgrade -y
 </code>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
