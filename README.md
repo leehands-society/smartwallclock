@@ -8,6 +8,11 @@
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <p>dd</p>
+
+<code>
+sudo apt-get update<br>
+sudo apt-get upgrade -y<br>
+</code>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2>Binaries and Sources</h2>
