@@ -1,5 +1,5 @@
-<hr />
 <h1><strong>SMART WALL CLOCK - SETUP</strong></h1>
+
 <p><strong><img src="https://www.leehands.com/wp-content/uploads/2022/01/KakaoTalk_Photo_2022-01-26-12-36-17-1200x901.jpeg" alt="SmartwallClock" width="499" height="375" /></strong></p>
 <h2><span style="color: #3366ff;">ENVIRONMENTS</span></h2>
 <p>you need to two board is</p>
