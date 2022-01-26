@@ -8,11 +8,23 @@
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <p>dd</p>
-
-<code>sudo apt-get update</code>
-<code>sudo apt-get upgrade -y</code>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<br>Basic Update
+<br><code>sudo apt-get update</code><br>
+<br><code>sudo apt-get upgrade -y</code>
+<br>
+<br>Enable I2C Interface by using <code>raspi-config</code>
+<br><code>ls /dev/*i2c*</code>
+<br><code>i2c detect -y -a 1</code>
+<br>
+<br>Clone repository
+<br><code>git clone </code>
+<br>
+<br>Excute
+<br><code>python3 main.py</code>
+<br>
+<br>Set Auto Start program
+<br><code>sudo python3 /home/pi/smartwallclock/main.py &</code>
+<br>
 <h2>Binaries and Sources</h2>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -22,17 +34,3 @@
 <h2 dir="auto">Thanks</h2>
 <p>&nbsp;</p>
 
-
-<b> 2. Enable I2C Interface by using "raspi-config" </b>
-
-Typing in command line
-  " ls /dev/*i2c* "<br>
-  " i2cdetect -y -a 1 "<br>
-   
-<b> 3.excute python files  </b><br>
-  " python3 main.py
-
-<b> 4. Set Autostart </b><br>
-  " sudo vim /etc/rc.local "<br>
-  <br>
-  add " sudo python3 /home/pi/smartwallclock/main.py & "<br>
