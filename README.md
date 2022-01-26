@@ -6,16 +6,13 @@
 <p><strong>2) FND AS1115 SHIELD BOARD</strong></p>
 <p>FND AS1115 SHIELD Board is custom board from leehands.</p>
 <p>&nbsp;</p>
-<hr />
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <p>dd</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<hr />
 <h2>Binaries and Sources</h2>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<hr />
 <h2 dir="auto">Docs</h2>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
