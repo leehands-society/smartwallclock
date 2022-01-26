@@ -7,6 +7,7 @@
 <p><strong>1) RASPBERRY PI ZERO W</strong></p>
 <p><strong>2) FND AS1115 SHIELD BOARD</strong></p>
 <p>FND AS1115 SHIELD Board is custom board from leehands.</p>
+<br>if want shield board, will buy through my shop.
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <br>Basic Update
