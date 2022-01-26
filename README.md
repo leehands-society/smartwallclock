@@ -8,7 +8,7 @@
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <br>Basic Update
-<br><code>sudo apt-get update</code><br>
+<br><code>sudo apt-get update</code>
 <br><code>sudo apt-get upgrade -y</code>
 <br>
 <br>Enable I2C Interface by using <code>raspi-config</code>
