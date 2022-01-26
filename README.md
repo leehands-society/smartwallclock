@@ -16,7 +16,6 @@
 <h2 dir="auto">Docs</h2>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<hr />
 <h2 dir="auto">Thanks</h2>
 <p>&nbsp;</p>
 
