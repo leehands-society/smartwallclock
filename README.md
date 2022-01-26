@@ -1,3 +1,8 @@
+<b>Target Board</b>
+  A. Raspberry Pi Zero W
+  B. FND Watch shield Board ( it's custom from Leehands )
+  
+  
 <b> 1. TOOL CHAIN </b>
 
 <font size = 7>sudo apt-get install git vim i2c-tools -y <br>
