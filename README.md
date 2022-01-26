@@ -12,7 +12,7 @@
 <br><code>sudo apt-get upgrade -y</code>
 <br>
 <br>Enable I2C Interface by using <code>raspi-config</code>
-<img src="https://www.leehands.com/wp-content/uploads/2022/01/스크린샷-2022-01-26-오후-12.53.02.png" alt="SmartwallClock" width="499" height="375" />
+<img src="https://www.leehands.com/wp-content/uploads/2022/01/스크린샷-2022-01-26-오후-12.53.02.png" alt="SmartwallClock" width="499" height="275" />
 <br>
 <br><code>ls /dev/*i2c*</code>
 <br><code>i2c detect -y -a 1</code>
