@@ -1,6 +1,6 @@
 <b>Target Board</b>
-  A. Raspberry Pi Zero W
-  B. FND Watch shield Board ( it's custom from Leehands )
+  <br>A. Raspberry Pi Zero W
+  <br>B. FND Watch shield Board ( it's custom from Leehands )
   
   
 <b> 1. TOOL CHAIN </b>
