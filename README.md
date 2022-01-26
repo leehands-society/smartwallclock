@@ -6,6 +6,7 @@
 <p>you need to two board is</p>
 <p><strong>1) RASPBERRY PI ZERO W</strong></p>
 <p><strong>2) FND AS1115 SHIELD BOARD</strong></p>
+<p><strong>3) Case from 3D Printer</strong></p>
 <p>FND AS1115 SHIELD Board is custom board from leehands.</p>
 <br>if want shield board, will buy through my shop.
 <p>&nbsp;</p>
