@@ -41,7 +41,7 @@ class AS1115:
         self.cnt = 0
         self.previous_min = 0;
         self.defaultbright = 0x1
-        
+        self.bright_avg = [1,1,1] # 3 value array
 
         ld_DP.off()
         ld_PM.off()
@@ -89,22 +89,31 @@ class AS1115:
         if self.previous_min != time.tm_min:
             self.previous_min = time.tm_min
             # HOUR
-            if time.tm_hour > 12 :
+            if time.tm_hour >= 12 :
                 ld_PM.off()
                 ld_AM.on()
-                dis_hour = time.tm_hour - 12
+                if time.tm_hour == 12 :
+                  dis_hour = 12
+                else :
+                  dis_hour = time.tm_hour - 12
                 
                 self.bus.write_byte_data(self.addr,FND_HR_01,(int)(dis_hour%10))
                 if dis_hour < 10:   
                     dis_hour = 0x0F
                 else :
-                    dis_hour = dis_hour/10
+                    dis_hour = (int)(dis_hour/10)
                     
                 self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
             else : # < 12
                 ld_PM.on()   # LED OFF
                 ld_AM.off()  # LED ON
-                dis_hour = time.tm_hour
+                
+                # if midnight , display is 12
+                if time.tm_hour == 0 :
+                  dis_hour = 12
+                else :
+                  dis_hour = time.tm_hour
+                  
                 if dis_hour < 10 :
                     self.bus.write_byte_data(self.addr,FND_HR_10,0x0F)
                 else:
@@ -121,7 +130,13 @@ class AS1115:
         buff = (int)((float)(adcinput / 1.4) * 16)
         if buff < 0 :
             buff = 0
-
+        
+        self.bright_avg[0] = self.bright_avg[1]
+        self.bright_avg[1] = self.bright_avg[2]
+        self.bright_avg[2] = buff
+        
+        buff = (int)((self.bright_avg[0] + self.bright_avg[1] + self.bright_avg[2]) / 3)
+        #print (buff)
         brightvalue = self.defaultbright + buff;
         if brightvalue > 0x0F :
             brightvalue = 0x0F
