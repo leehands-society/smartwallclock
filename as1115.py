@@ -145,11 +145,3 @@ class AS1115:
         self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI32, brightvalue<<4 | brightvalue)
         self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI54, brightvalue)
         self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI76, 0x00)
-
-        
-
-
-
-
-
-
