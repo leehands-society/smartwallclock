@@ -14,12 +14,13 @@
 <br>Basic Update
 <br><code>sudo apt-get update</code>
 <br><code>sudo apt-get upgrade -y</code>
+<br><code>sudo apt-get install i2c-tools
 <br>
 <br>Enable I2C Interface by using <code>raspi-config</code>
 <img src="https://www.leehands.com/wp-content/uploads/2022/01/스크린샷-2022-01-26-오후-12.53.02.png" alt="SmartwallClock" width="499" height="275" />
 <br>
 <br><code>ls /dev/*i2c*</code>
-<br><code>i2c detect -y -a 1</code>
+<br><code>i2cdetect -y -a 1</code>
 <br>
 <br>Clone repository
 <br><code>git clone https://github.com/leehands-society/smartwallclock.git </code>
