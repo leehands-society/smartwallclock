@@ -15,6 +15,10 @@
 <br><code>sudo apt-get update</code>
 <br><code>sudo apt-get upgrade -y</code>
 <br><code>sudo apt-get install i2c-tools</code>
+<br><code>sudo apt-get install python3-pip</code>
+<br><code>sudo apt-get install build-essential python3-dev python3-smbus</code>
+<br><code>sudo pip3 install gpiozero </code>
+<br><code>sudo pip3 install smbus </code>
 <br>
 <br>Enable I2C Interface by using <code>raspi-config</code>
 <img src="https://www.leehands.com/wp-content/uploads/2022/01/스크린샷-2022-01-26-오후-12.53.02.png" alt="SmartwallClock" width="499" height="275" />
