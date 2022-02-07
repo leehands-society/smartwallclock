@@ -20,8 +20,9 @@
 <br> https://github.com/leehands-society/RPi.GPIO
 <br><code>sudo pip3 install smbus </code>
 <br>
-<br>Enable I2C Interface by using <code>raspi-config</code>
-<img src="https://www.leehands.com/wp-content/uploads/2022/01/스크린샷-2022-01-26-오후-12.53.02.png" alt="SmartwallClock" width="499" height="275" />
+<br>Enable I2C Interface by using <code>armbian-config</code>
+<img src="https://www.leehands.com/wp-content/uploads/2022/02/20220208_Rpi.GPIO_3.jpg" alt="SmartwallClock" width="499" height="275" />
+<br>should check i2c0 and w1-gpio
 <br>
 <br><code>ls /dev/*i2c*</code>
 <br><code>i2cdetect -y -a 1</code>
