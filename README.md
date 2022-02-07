@@ -4,7 +4,7 @@
 <br> Very accurate time display.
 <h2><span style="color: #3366ff;">ENVIRONMENTS</span></h2>
 <p>you need to two board is</p>
-<p><strong>1) RASPBERRY PI ZERO W</strong></p>
+<p><strong>1) BANANA PI M2 ZERO</strong></p>
 <p><strong>2) FND AS1115 SHIELD BOARD</strong></p>
 <p><strong>3) Case from 3D Printer</strong></p>
 <p>FND AS1115 SHIELD Board is custom board from leehands.</p>
@@ -17,7 +17,7 @@
 <br><code>sudo apt-get install i2c-tools</code>
 <br><code>sudo apt-get install python3-pip</code>
 <br><code>sudo apt-get install build-essential python3-dev python3-smbus</code>
-<br><code>sudo pip3 install gpiozero </code>
+<br> https://github.com/leehands-society/RPi.GPIO
 <br><code>sudo pip3 install smbus </code>
 <br>
 <br>Enable I2C Interface by using <code>raspi-config</code>
