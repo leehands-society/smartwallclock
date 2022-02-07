@@ -6,7 +6,7 @@ import smbus
 class ADC081:
     def __init__(self,addr):
         self.addr = addr
-        self.bus = smbus.SMBus(1) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
+        self.bus = smbus.SMBus(0) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
     
     def print_test(self):
         print("test ok")

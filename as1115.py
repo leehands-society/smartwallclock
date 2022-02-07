@@ -1,17 +1,17 @@
 #################################
 ## Python Module from Leehands ##
 #################################
-from gpiozero import LED
+import RPi.GPIO as GPIO
 from time import sleep
 import smbus
 import time
 
 
-ld_DP = LED(14)
-ld_PM = LED(15)
-ld_AM = LED(18)
-ld_LUC = LED(23)
-ld_ALM = LED(24)
+ld_DP = 8    #LED(14)
+ld_PM = 10   #LED(15)
+ld_AM = 12   #LED(18)
+ld_LUC = 16  #LED(23)
+ld_ALM = 18  #LED(24)
 
 
 CTR_SHUTDOWN =	0x0C
@@ -37,18 +37,25 @@ FND_AC_01 = 0x05
 class AS1115:
     def __init__(self,addr):
         self.addr = addr
-        self.bus = smbus.SMBus(1) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
+        self.bus = smbus.SMBus(0) # 0 = /dev/i2c-0 , 1 = /dev/i2c-1
         self.cnt = 0
         self.previous_min = 0;
         self.defaultbright = 0x1
         self.bright_avg = [1,1,1] # 3 value array
-
-        ld_DP.off()
-        ld_PM.off()
-        ld_AM.off()
-        ld_LUC.off()     
-        ld_ALM.off()
-    
+        
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(ld_DP,GPIO.OUT)
+        GPIO.setup(ld_PM,GPIO.OUT)
+        GPIO.setup(ld_AM,GPIO.OUT)
+        GPIO.setup(ld_LUC,GPIO.OUT)
+        GPIO.setup(ld_ALM,GPIO.OUT)        
+        
+        GPIO.output(ld_DP,False)
+        GPIO.output(ld_PM,False)
+        GPIO.output(ld_AM,False)
+        GPIO.output(ld_LUC,False)
+        GPIO.output(ld_ALM,False)
+            
         self.bus.write_byte_data(self.addr,CTR_FEATURE, 0x02)
         self.bus.write_byte_data(self.addr,CTR_SHUTDOWN, 0x01)
         self.bus.write_byte_data(self.addr,CTR_INTENSITY_DIGI10, self.defaultbright<<4 | self.defaultbright)
@@ -81,17 +88,18 @@ class AS1115:
         self.bus.write_byte_data(self.addr,FND_SS_01,(int)(time.tm_sec%10))
         # DOT
         if(time.tm_sec%2):
-            ld_LUC.on()
+            GPIO.output(ld_LUC,True)    #ld_LUC.on()
         else:
-            ld_LUC.off()
+            GPIO.output(ld_LUC,False)    #ld_LUC.off()
 
         # CHECK to update
         if self.previous_min != time.tm_min:
             self.previous_min = time.tm_min
             # HOUR
             if time.tm_hour >= 12 :
-                ld_PM.off()
-                ld_AM.on()
+                
+                GPIO.output(ld_PM,False)    #ld_PM.off()
+                GPIO.output(ld_AM,True)     #ld_AM.on()
                 if time.tm_hour == 12 :
                   dis_hour = 12
                 else :
@@ -105,8 +113,9 @@ class AS1115:
                     
                 self.bus.write_byte_data(self.addr,FND_HR_10, dis_hour)
             else : # < 12
-                ld_PM.on()   # LED OFF
-                ld_AM.off()  # LED ON
+                
+                GPIO.output(ld_PM,True)    #ld_PM.on()
+                GPIO.output(ld_AM,False)     #ld_AM.off()
                 
                 # if midnight , display is 12
                 if time.tm_hour == 0 :
