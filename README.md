@@ -12,7 +12,7 @@
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
 <br>Armbian image can be download : Armbian_20.02.3_Bananapim2zero_buster_current_5.4.18_desktop
-<br>you can download below link : https://drive.leehands.com/d/f/668800049513282149
+<br>you can download below link : <a href ="https://drive.leehands.com/d/f/668800049513282149">Download</a>
 <br>
 <br>Basic Update
 <br><code>sudo apt-get update</code>
