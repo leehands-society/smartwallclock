@@ -19,7 +19,7 @@
 <br><code>sudo apt-get install i2c-tools</code>
 <br><code>sudo apt-get install python3-pip</code>
 <br><code>sudo apt-get install build-essential python3-dev python3-smbus</code>
-<br>Install RPi.GPIO for Bananapi (<a href="https://github.com/leehands-society/RPi.GPIO">GITHUB</a>)
+<br>Install RPi.GPIO for Bananapi (refer to GitHub : https://github.com/leehands-society/RPi.GPIO )
 <br><code>sudo pip3 install smbus </code>
 <br>
 <br>Enable I2C Interface by using <code>armbian-config</code>
