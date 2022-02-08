@@ -11,8 +11,8 @@
 <br>if want shield board, will buy through my shop.
 <p>&nbsp;</p>
 <h2><span style="color: #3366ff;">GENERAL USAGE</span></h2>
-<br>Banana PI M2 Zero information : https://wiki.banana-pi.org/Getting_Started_with_M2_Zero
-<br>Armbian image can be download : <a href ="https://drive.leehands.com/d/f/668800049513282149">Armbian_20.02.3_Bananapim2zero_buster_current_5.4.18_desktop</a>
+<br>-Banana PI M2 Zero information : https://wiki.banana-pi.org/Getting_Started_with_M2_Zero
+<br>-Armbian image can be download : <a href ="https://drive.leehands.com/d/f/668800049513282149">Armbian_20.02.3_Bananapim2zero_buster_current_5.4.18_desktop</a>
 <br>
 <br>Basic Update
 <br><code>sudo apt-get update</code>
